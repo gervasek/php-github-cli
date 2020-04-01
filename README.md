@@ -46,6 +46,9 @@ ghcli ref:create octocat HelloWorld -r refs/heads/depedency/2.3.78 -s bdb276f322
 ghcli file:update octocat HelloWorld build.properties.lock 'Updated to version 2.3.78' 'depedency.version = 2.3.78' 'depedency/2.3.78' -c
 ghcli pr:create octocat HelloWorld -t "Minor upgrade 2.3.78" -s depedency/2.3.78  -b master -d "Minor upgrade depedency/2.3.78"
 ghcli branch:protect octocat HelloWorld master -T qa-support -t qa-support
+ghcli  webhook:tag octocat HelloWorld https://my.drone.url/ 2.99
+ghcli  webhook:push octocat HelloWorld https://my.drone.url/ -b master
+ghcli  webhook:pull-request octocat HelloWorld https://my.drone.url/ 1
 
 ```
 
@@ -67,22 +70,29 @@ Options:
   -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
 
 Available commands:
-  help            Displays help for a command
-  list            Lists commands
+  help                  Displays help for a command
+  list                  Lists commands
  branch
-  branch:create   Create a branch from another branch
-  branch:protect  Protect a branch
+  branch:create         Create a branch from another branch
+  branch:protect        Protect a branch
  deploy
-  deploy:create   Creates a deployment
-  deploy:list     List deployments for a repo
-  deploy:update   Creates a deployment status
+  deploy:create         Creates a deployment
+  deploy:list           List deployments for a repo
+  deploy:status-list    List statuses for a deployment
+  deploy:update         Creates a deployment status
  file
-  file:update     Updates a file
+  file:update           Updates a file
  pr
-  pr:comment      Comment a pull request
-  pr:create       Create a pull request
+  pr:comment            Comment a pull request
+  pr:create             Create a pull request
  ref
-  ref:create      Create a branch from another ref
+  ref:create            Create a branch from another ref
+ repo
+  repo:search           Search repositories
  status
-  status:set      Creates/updates a commit status
+  status:set            Creates/updates a commit status
+ webhook
+  webhook:pull-request  Trigger pull-resquest event to webhook
+  webhook:push          Trigger push event to webhook
+  webhook:tag           Trigger tag event to webhook
 ```
